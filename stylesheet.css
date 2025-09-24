@@ -1,0 +1,149 @@
+* {
+    font-family: inter;
+}
+
+.wrapper {
+    display: grid;
+    align-self: center;
+    justify-self: center;
+    width: 1000px;
+    height: 932px;
+    border: 1px solid #D8D9DA;
+    border-radius: 20px;
+}
+
+.wrapperItem {
+    display: grid;
+    grid-template-columns: 370px 1fr;
+}
+
+
+
+.wrapperLeftItem {
+    display: grid;
+    border-right: 1px solid #D8D9DA;
+}
+
+.wrapperTitle {
+    text-align: center;
+    margin-top: 38px;
+}
+
+
+.newNoteButton {
+    display: grid;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 53px;
+}
+
+.newNoteButtonItem:hover{
+    cursor: pointer;
+}
+
+.newNoteButtonItem {
+    background-color: #4499FF;
+    width: 300px;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+}
+
+.tags {
+    margin-top: 53px;
+}
+
+.TagsTitle {
+    font-size: 30px;
+    margin-left: 30px;
+}
+
+.TagsItem {
+    font-size: 25px;
+}
+
+.TagsItems {
+    display: grid;
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 20px;
+} 
+
+.TagsButton {
+    margin-right: 40px;
+}
+
+.TagsList>button {
+    background-color: white;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 53px;
+    text-align: left;
+}
+
+.TagsList>.TagsButton:hover {
+    cursor: pointer;
+    background-color: #F0F0F0;
+    border-radius: 10px;
+}
+
+.wrapperRightItem {
+    border-left: 1px solid #F0F0F0;
+}
+
+.SearchItemsItem>input {
+    width: 512px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #FCFCFD;
+    border: 1px solid #E3E3E2;
+    font-size: 20px;
+}
+
+
+.SearchItemsItem>button {
+    height: 50px;
+    width: 50px;
+    border: none;
+    background-color:#4499FF;
+    border-radius: 10px;
+}
+
+.SearchItemsItem>button:hover {
+    cursor: pointer;
+}
+
+.SearchItemsItem {
+    display: flex;
+    gap: 11px;
+    justify-content: center;
+    margin-top: 36px;
+}
+
+.NoteBox {
+    display: grid;
+    grid-column: auto;
+    gap: 30px;
+    margin-top: 53px;
+    justify-self: center;
+}
+
+.NoteBoxItem>button {
+    width: 573px;
+    height: 113px;
+    border: 1px solid#E3E2E5;
+    border-radius: 10px;
+    background-color: white;
+}
+
+
+.NoteTitle {
+    display: flex;
+    justify-content: space-between;
+}
