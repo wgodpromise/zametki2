@@ -127,23 +127,52 @@ ul {
 }
 
 .NoteBox {
-    display: grid;
-    grid-column: auto;
+    display: flex;
+    flex-direction: column;
     gap: 30px;
     margin-top: 53px;
     justify-self: center;
 }
 
-.NoteBoxItem>button {
+.NoteBoxItem {
     width: 573px;
     height: 113px;
     border: 1px solid#E3E2E5;
     border-radius: 10px;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
 }
-
 
 .NoteTitle {
-    display: flex;
-    justify-content: space-between;
+    font-size: 30px;
+    font-weight: 700;
+    align-self: flex-start;
+    overflow: fit-content;
+    margin-left: 20px;
+    margin-top:10px;
 }
+
+.NoteTag {
+    font-size: 15px;
+    position: absolute;
+    align-self: flex-end;
+    margin-right: 20px;
+    margin-top: 20px;
+    font-size: 15px;
+    background-color: #F5F7F7;
+    padding: 5px;
+    border-radius: 10px;
+    width: 84px;
+    height: 28px;
+    text-align: center;
+}
+
+
+.NoteData {
+    margin-bottom: 10px;
+    margin-left: 20px;
+}
+
