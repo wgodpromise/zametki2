@@ -182,7 +182,7 @@ ul {
     position: fixed;
     top: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     right: 0;
