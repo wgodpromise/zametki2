@@ -1,21 +1,48 @@
-// const BtnSearch = document.getElementById('ButtonSearch')
 const list = document.getElementById('list')
-// const tags = ['Все', 'Идеи', 'Личное', 'Работа']
 const BtnSearch = document.getElementById('ButtonSearch')
 const SearchText = document.getElementById('searchText')
-// const list = document.getElementById('list')
+const menu = document.getElementById('TagsList')
+const overlay = document.getElementById('overlay')
+const modalTitle = document.getElementById('ModalTitle')
+const modalSelect = document.getElementById('ModalSelect')
+const modalSaveBtn = document.getElementById('ModalButtonSave')
+const modalForm = document.getElementById('modal-form')
+const btnNote = document.getElementById('newNoteButton')
+const btnModalClose = document.getElementById('btnModalClose')
+
+let btnDel = null
+let editingItem = null
+let maxId = null
 let activeTag = 1
-const tags = ['Все', 'Идеи', 'Личное', 'Работа']
+
+const tags = [
+    {
+        id: 1,
+        title: 'Все'
+    },
+    {
+        id: 2,
+        title: 'Идеи'
+    },
+    {
+        id: 3,
+        title: 'Личное'
+    },
+    {
+        id: 4,
+        title: 'Работа'
+    }
+]
 const notes = [
     {
         title: 'Сдать отчёт',
         tag: 'Работа',
-        updateAt: new Date()
+        updateAt: new Date().toDateString()
     },
     {
         title: 'ASDFСдать отчётadf',
         tag: 'Работа',
-        updateAt: new Date()
+        updateAt: new Date().toDateString()
     },
 ]
 
@@ -45,27 +72,88 @@ function createNote(note) {
 
 
 
+function getMaxId() {
+    let max = 0
+    for (let i of notes) {
+        if (i.id > max) {
+            max = i.id
+        }
+    }
+    return max
+}
+
+function createTag(tag) {
+    const element = document.createElement('ul')
+    element.classList.add('TagsButton')
+    element.innerText = tag.title
+    return element
+}
+
+function renderMenu() {
+    for (let tag of tags) {
+        const element = createTag(tag)
+        element.addEventListener('click', () => {
+            activeTag = tag.id
+            render()
+        })
+        menu.appendChild(element)
+    }
+}
+
 function NotesFilter() {
     return notes.filter((e) => e.title.startsWith(SearchText.value))
 }
 
 function render() {
-    list.innerHTML = ' '
-    let renderArr = notes
-    if (SearchText.value.length) {
-        renderArr = NotesFilter()
+    list.innerHTML = ''
+    let filtered = NotesFilter(SearchText.value)
+    if (activeTag !== 1) {
+        filtered = filtered.filter(i => i.tag === activeTag)
     }
-    for (const note of renderArr) {
-        const zametka = createNote(note)
-        list.appendChild(zametka)
+    if (filtered.length === 0) {
+        list.innerText = 'Ничего не найдено'
+        return
     }
+    for (let i of filtered) {
+        const element = createNote(i)
+        list.appendChild(element)
+    }
+}
 
-
+function openModal() {
+    overlay.classList.add('overlayOpened')
+    modalTitle.value = editingItem.title
+    for (let tag of tags) {
+        const option = document.createElement('option')
+        option.value = tag.id
+        option.innerText = tag.title
+        modalSelect.appendChild(option)
+    }
 }
 
 function init() {
+    maxId = getMaxId()
+    renderMenu()
     render()
     BtnSearch.addEventListener('click', render)
+    btnNote.addEventListener('click', () => {
+        editingItem = {
+            id: null,
+            title: null,
+            tag: null,
+            updatedAt: new Date().toDateString()
+        }
+        openModal()
+    })
+    btnModalClose.addEventListener('click', closeModal)
+}
+
+function closeModal() {
+    overlay.classList.toggle('overlayOpened')
+    modalSelect.innerHTML = ''
+    editingItem = null
+    // btnDel.remove()
+    //TODO clear form
 }
 
 init()

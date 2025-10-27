@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheet.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
     <title>Document</title>
 </head>
+
 <body>
-<div class="wrapper">
-    <div class="wrapperItem">
+    <div class="wrapper">
+        <div class="wrapperItem">
             <div class="wrapperLeftItems">
                 <div class="wrapperLeftItemsItem">
                     <div class="wrapperTitle">
                         <h1>Мои Заметки</h1>
-                    </div>  
+                    </div>
                     <div class="newNoteButton">
-                        <button class="newNoteButtonItem">
+                        <button id="newNoteButton" class="newNoteButtonItem">
                             Новая заметка
                         </button>
                     </div>
                 </div>
-               <div class="tags">
+                <div class="tags">
                     <div class="TagsItems">
                         <span class="TagsTitle">Теги</span>
-                        <ul class="TagsList">
-                            <button class="TagsButton"><li class="TagsItem">Все</li></button>
-                            <button class="TagsButton"><li class="TagsItem">Идеи</li></button>
-                            <button class="TagsButton"><li class="TagsItem">Личное</li></button>
-                            <button class="TagsButton"><li class="TagsItem">Работа</li></button>
-                            <button class="TagsButton"><li class="TagsItem">Список покупок</li></button>
+                        <ul id="TagsList" class="TagsList">
                         </ul>
                     </div>
-               </div>     
+                </div>
             </div>
             <div class="wrapperRightItem">
                 <div class="SearchItems">
                     <div class="SearchItemsItem">
                         <input type="text" placeholder="Поиск" id="searchText">
-                        <button><img src="images/Vector.svg" alt="Поиск" id="ButtonSearch"></button>
+                        <button id="ButtonSearch"><img src="images/Vector.svg" alt="Поиск"></button>
                     </div>
                 </div>
-                    
+
                 <div class="Notes">
                     <div class="NoteBox" id="list">
-                        
+
                     </div>
                 </div>
             </div>
-    
-    </div>
-    <!-- <div class="overlay">
-        <div class="modal">
-            <button class="ModalClose" id="ModalClose"> X</button>
-                <form class="ModalForm">
-                    <input type="text" class="ModalInput" placeholder="Заголовок">
-                <select class="ModalInput" name="select" id="ModalSelect">
-                    <option value="value1">Значение1</option>
-                    <option selected value="value2">Значение2</option>
-                    <option value="value3">Значение3</option>
-                </select>
-                <button class="ModalButtonSave">Сохранить</button>
-            </form>
+
         </div>
-        
-    </div> -->
-</div>
+        <div class="overlayClosed" id="overlay">
+            <div class="modal">
+                <button class="ModalClose" id="btnModalClose">X</button>
+                <form id="ModalForm" class="ModalForm">
+                    <input type="text" class="ModalInput" placeholder="Заголовок" id="ModalTitle">
+                    <select class="ModalSelect" itemid="ModalSelect" name="select" id="ModalSelect">
+                        <option value="value1">Значение1</option>
+                        <option selected value="value2">Значение2</option>
+                        <option value="value3">Значение3</option>
+                        <option value="value4">Значение4</option>
+                    </select>
+                    <button id="ModalButtonSave" class="ModalButtonSave">Сохранить</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
     <script src="/script.js" defer></script>
 </body>
+
 </html>
