@@ -6,9 +6,10 @@ const overlay = document.getElementById('overlay')
 const modalTitle = document.getElementById('ModalTitle')
 const modalSelect = document.getElementById('ModalSelect')
 const modalSaveBtn = document.getElementById('ModalButtonSave')
-const modalForm = document.getElementById('modal-form')
+const modalForm = document.getElementById('ModalForm')
 const btnNote = document.getElementById('newNoteButton')
 const btnModalClose = document.getElementById('btnModalClose')
+// const btnModalDelete = document.getElementById('ModalButtonDelete')
 
 let btnDel = null
 let editingItem = null
@@ -33,18 +34,7 @@ const tags = [
         title: 'Работа'
     }
 ]
-const notes = [
-    {
-        title: 'Сдать отчёт',
-        tag: 'Работа',
-        updateAt: new Date().toDateString()
-    },
-    {
-        title: 'ASDFСдать отчётadf',
-        tag: 'Работа',
-        updateAt: new Date().toDateString()
-    },
-]
+const notes = initData()
 
 function createNote(note) {
 
@@ -57,20 +47,22 @@ function createNote(note) {
 
     const date = document.createElement('span')
     date.classList.add('NoteData')
-    date.innerText = note.updateAt
+    date.innerText = new Date().toDateString()
 
     const tag = document.createElement('span')
-    tag.innerText = note.tag
+    tag.innerText = tags.find((i) => i.id === note.tag).title
     tag.classList.add('NoteTag')
 
     element.appendChild(title)
     element.appendChild(date)
     element.appendChild(tag)
 
+    element.addEventListener('click', () => {
+    editingItem = note
+    openModal()
+  })
     return element
 }
-
-
 
 function getMaxId() {
     let max = 0
@@ -129,6 +121,49 @@ function openModal() {
         option.innerText = tag.title
         modalSelect.appendChild(option)
     }
+    if (editingItem.id) {
+    btnDel = document.createElement('button')
+    btnDel.classList.add('ModalButtonDelete')
+    btnDel.innerText = 'Удалить'
+    btnDel.addEventListener('click', (e) => {
+      e.preventDefault()
+      onDelete(editingItem.id)
+    })
+    modalForm.appendChild(btnDel)
+  }
+}
+
+function initData() {
+  const rawData = localStorage.getItem('data')
+  if (rawData === null) {
+    return []
+  }
+  return JSON.parse(rawData)
+}
+
+function saveToLocal() {
+    localStorage.setItem('data', JSON.stringify(notes))
+}
+
+function save() {
+  if (!editingItem.id) {
+    notes.unshift({
+      id: ++maxId,
+      title: modalTitle.value,
+      tag: +modalSelect.value,
+      updatedAt: editingItem.updatedAt
+    })
+  }
+  if (editingItem.id) {
+    const item = notes.find(i => i.id === editingItem.id)
+    item.title = modalTitle.value
+    item.tag = +modalSelect.value
+    item.updatedAt = new Date().toDateString()
+
+  }
+  saveToLocal()
+  render()
+  closeModal()
 }
 
 function init() {
@@ -146,13 +181,25 @@ function init() {
         openModal()
     })
     btnModalClose.addEventListener('click', closeModal)
+    modalSaveBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    save()
+  })
+}
+
+function onDelete(id) {
+  const idx = notes.findIndex(i => i.id === id)
+  notes.splice(idx, 1)
+  saveToLocal()
+  closeModal()
+  render()
 }
 
 function closeModal() {
     overlay.classList.toggle('overlayOpened')
     modalSelect.innerHTML = ''
     editingItem = null
-    // btnDel.remove()
+    btnDel.remove()
     //TODO clear form
 }
 

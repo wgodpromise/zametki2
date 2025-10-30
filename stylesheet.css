@@ -255,3 +255,16 @@ ul {
     border-radius: 10px;
     margin-top: 5px;
 }
+
+.ModalButtonDelete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+}
+
+.ModalButtonSave>:hover {
+    cursor: pointer;
+}
